@@ -100,19 +100,19 @@ If sending bytes inline fails, switch to `client.files.upload(...)` (the documen
 
 ### Morning: REST API and text bot (~3 h)
 
-- [ ] Tasks repository (create, list with optional status filter, get, update status, delete)
-- [ ] User repository: get-or-create by `telegram_id`
-- [ ] `GET /api/tasks` (with `status` filter)
-- [ ] `POST /api/tasks`
-- [ ] `PATCH /api/tasks/{id}` (status change)
-- [ ] `DELETE /api/tasks/{id}`
-- [ ] `GET /api/health` (checks DB and Redis)
-- [ ] CORS middleware
-- [ ] 404 on a missing id, 422 on invalid input
-- [ ] Bot entrypoint with aiogram long polling
-- [ ] `/start` and `/help`
-- [ ] Text handler: get-or-create user, create task (`source=text`), reply with confirmation
-- [ ] Politely reject unsupported message types (photos, stickers, and so on)
+- [x] Tasks repository (create, list with optional status filter, get, update status, delete)
+- [x] User repository: get-or-create by `telegram_id`
+- [x] `GET /api/tasks` (with `status` filter)
+- [x] `POST /api/tasks`
+- [x] `PATCH /api/tasks/{id}` (status change)
+- [x] `DELETE /api/tasks/{id}`
+- [x] `GET /api/health` (checks DB and Redis)
+- [x] CORS middleware
+- [x] 404 on a missing id, 422 on invalid input
+- [x] Bot entrypoint with aiogram long polling
+- [x] `/start` and `/help`
+- [x] Text handler: get-or-create user, create task (`source=text`), reply with confirmation
+- [x] Politely reject unsupported message types (photos, stickers, and so on)
 - [ ] Manual check: send a text message and see the row in Postgres
 
 ### Afternoon: Gemini and the worker (~5 h)
