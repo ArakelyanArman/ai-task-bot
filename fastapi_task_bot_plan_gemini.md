@@ -146,12 +146,12 @@ Notes:
 
 ### Phase 1: Database and REST API (~1 day)
 
-- [ ] Run Postgres and Redis locally (a minimal compose file is fine for now)
-- [ ] Write the async SQLAlchemy engine and session factory (`db/session.py`)
-- [ ] Define `User` and `Task` models (use Enums for status/source/transcription_status)
-- [ ] Initialize Alembic (async template) and generate the first migration
-- [ ] Apply the migration and verify the tables exist
-- [ ] Write Pydantic schemas: `TaskCreate`, `TaskUpdate`, `TaskRead`
+- [x] Run Postgres and Redis locally (a minimal compose file is fine for now)
+- [x] Write the async SQLAlchemy engine and session factory (`db/session.py`)
+- [x] Define `User` and `Task` models (use Enums for status/source/transcription_status)
+- [x] Initialize Alembic (async template) and generate the first migration
+- [x] Apply the migration and verify the tables exist
+- [x] Write Pydantic schemas: `TaskCreate`, `TaskUpdate`, `TaskRead`
 - [ ] Write the tasks repository (create, list, get, update status, delete)
 - [ ] `GET /api/tasks` with optional `status` filter
 - [ ] `POST /api/tasks`
