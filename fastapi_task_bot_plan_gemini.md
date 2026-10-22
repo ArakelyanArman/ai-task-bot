@@ -163,17 +163,17 @@ If sending bytes inline fails, switch to `client.files.upload(...)` (the documen
 
 ### Daytime: dashboard (~5.5 h)
 
-- [ ] Scaffold React with Vite, add Tailwind
-- [ ] API client module and a typed `Task` model
-- [ ] Fetch tasks on load via `GET /api/tasks`
-- [ ] Kanban board with three columns: Pending, In Progress, Completed
-- [ ] Task card (title, 🎙/⌨️ source icon, created time)
-- [ ] Status buttons on each card (move to previous/next column) that call `PATCH`
-- [ ] WebSocket hook: merge `task.created`, `task.updated`, `task.deleted` into state
-- [ ] Reconnect on disconnect, and refetch tasks after reconnecting
-- [ ] "Transcribing…" spinner on voice tasks that are still processing
-- [ ] Failed state showing the error message
-- [ ] Responsive layout (columns stack on mobile)
+- [x] Scaffold React with Vite
+- [x] API client module and a typed `Task` model
+- [x] Fetch tasks on load via `GET /api/tasks`
+- [x] Kanban board with three columns: Pending, In Progress, Completed
+- [x] Task card (title, 🎙/⌨️ source icon, created time)
+- [x] Status buttons on each card (move to previous/next column) that call `PATCH`
+- [x] WebSocket hook: merge `task.created`, `task.updated`, `task.deleted` into state
+- [x] Reconnect on disconnect, and refetch tasks after reconnecting
+- [x] "Transcribing…" spinner on voice tasks that are still processing
+- [x] Failed state showing the error message
+- [x] Responsive layout (columns stack on mobile)
 
 ### End of day: start Docker early (~1 h)
 
