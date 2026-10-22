@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     # optional settings
     gemini_transcribe_model: str = "gemini-3.5-transcribe"
     max_audio_duration: int = 60
+    max_audio_size: int = 10 * 1024 * 1024
 
 
 @lru_cache

@@ -113,7 +113,7 @@ If sending bytes inline fails, switch to `client.files.upload(...)` (the documen
 - [x] `/start` and `/help`
 - [x] Text handler: get-or-create user, create task (`source=text`), reply with confirmation
 - [x] Politely reject unsupported message types (photos, stickers, and so on)
-- [ ] Manual check: send a text message and see the row in Postgres
+- [x] Manual check: send a text message and see the row in Postgres
 
 ### Afternoon: Gemini and the worker (~5 h)
 
@@ -122,21 +122,21 @@ If sending bytes inline fails, switch to `client.files.upload(...)` (the documen
 - [ ] Test one voice note with a self-correction ("buy milk, no, oat milk") and one in Armenian or Russian
 
 **Queue and voice handler**
-- [ ] arq `WorkerSettings` (Redis settings, `max_tries`, `job_timeout`) and a helper to enqueue jobs
-- [ ] Voice handler: reject over the duration/size limit, send "🎙 Transcribing…", store its `message_id`, create the task, enqueue `transcribe_task(task_id, file_id)`
+- [x] arq `WorkerSettings` (Redis settings, `max_tries`, `job_timeout`) and a helper to enqueue jobs
+- [x] Voice handler: reject over the duration/size limit, send "🎙 Transcribing…", store its `message_id`, create the task, enqueue `transcribe_task(task_id, file_id)`
 
 **Transcription job**
-- [ ] `services/telegram.py`: get the file and download the audio
-- [ ] `services/transcription.py`: the Gemini wrapper with a timeout
-- [ ] `transcribe_task`: download, transcribe, update title, set `transcription_status=done`, edit the bot message with the result
+- [x] `services/telegram.py`: get the file and download the audio
+- [x] `services/transcription.py`: the Gemini wrapper with a timeout
+- [x] `transcribe_task`: download, transcribe, update title, set `transcription_status=done`, edit the bot message with the result
 
 **Resilience (build this in now, not later)**
-- [ ] Timeouts on Telegram download and Gemini call
-- [ ] Retries with exponential backoff for transient errors (timeouts, 5xx, 429)
-- [ ] No retry for permanent errors (bad audio, bad key)
-- [ ] Handle empty or blocked transcripts explicitly
-- [ ] On final failure: set `failed`, store `error_message`, notify the user in Telegram
-- [ ] Idempotency: skip the job if the task is already `done`
+- [x] Timeouts on Telegram download and Gemini call
+- [x] Retries with exponential backoff for transient errors (timeouts, 5xx, 429)
+- [x] No retry for permanent errors (bad audio, bad key)
+- [x] Handle empty or blocked transcripts explicitly
+- [x] On final failure: set `failed`, store `error_message`, notify the user in Telegram
+- [x] Idempotency: skip the job if the task is already `done`
 - [ ] Clean up temp files (and any uploaded files) in a `finally` block
 - [ ] Log the task id on every log line
 
