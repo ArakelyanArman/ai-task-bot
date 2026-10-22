@@ -135,12 +135,12 @@ Notes:
 
 ### Phase 0: Setup (~0.5 day)
 
-- [ ] Create the repo and the folder layout above
-- [ ] Create the Telegram bot via @BotFather and save the token
-- [ ] Get a Gemini API key from Google AI Studio (https://aistudio.google.com/apikey)
-- [ ] Create a Python virtualenv and `requirements.txt` (fastapi, uvicorn, sqlalchemy[asyncio], asyncpg, alembic, pydantic-settings, aiogram, arq, redis, httpx, **google-genai**, pytest, pytest-asyncio)
-- [ ] Write `core/config.py` using `pydantic-settings` (DB URL, Redis URL, bot token, `GEMINI_API_KEY`, `GEMINI_TRANSCRIBE_MODEL`, voice duration/size limits)
-- [ ] Write `.env.example` (no real secrets) and a `.gitignore` that excludes `.env`
+- [x] Create the repo and the folder layout above
+- [x] Create the Telegram bot via @BotFather and save the token
+- [x] Get a Gemini API key from Google AI Studio (https://aistudio.google.com/apikey)
+- [x] Create a Python virtualenv and `requirements.txt` (fastapi, uvicorn, sqlalchemy[asyncio], asyncpg, alembic, pydantic-settings, aiogram, arq, redis, httpx, **google-genai**, pytest, pytest-asyncio)
+- [x] Write `core/config.py` using `pydantic-settings` (DB URL, Redis URL, bot token, `GEMINI_API_KEY`, `GEMINI_TRANSCRIBE_MODEL`, voice duration/size limits)
+- [x] Write `.env.example` (no real secrets) and a `.gitignore` that excludes `.env`
 - [ ] Set up linting/formatting (`ruff`, `eslint`/`prettier`)
 - [ ] Add a README skeleton
 
