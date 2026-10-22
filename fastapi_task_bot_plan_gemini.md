@@ -152,13 +152,13 @@ If sending bytes inline fails, switch to `client.files.upload(...)` (the documen
 
 ### Morning: real-time backend (~2.5 h)
 
-- [ ] Event schema: `{ "type": "task.created" | "task.updated" | "task.deleted", "task": {...} }`
-- [ ] `services/events.py`: `publish_event()` using Redis pub/sub
-- [ ] Call `publish_event()` after commit from the REST endpoints, the bot, and the worker
-- [ ] API lifespan: background task subscribing to the Redis channel
-- [ ] Connection manager for WebSocket clients
-- [ ] `GET /ws` endpoint, handle disconnects
-- [ ] Broadcast Redis events to all connected clients
+- [x] Event schema: `{ "type": "task.created" | "task.updated" | "task.deleted", "task": {...} }`
+- [x] `services/events.py`: `publish_event()` using Redis pub/sub
+- [x] Call `publish_event()` after commit from the REST endpoints, the bot, and the worker
+- [x] API lifespan: background task subscribing to the Redis channel
+- [x] Connection manager for WebSocket clients
+- [x] `GET /ws` endpoint, handle disconnects
+- [x] Broadcast Redis events to all connected clients
 - [ ] Milestone: connect with `websocat` or the browser console, send a Telegram message, and see the event arrive
 
 ### Daytime: dashboard (~5.5 h)

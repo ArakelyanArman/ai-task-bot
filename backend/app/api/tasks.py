@@ -8,6 +8,8 @@ from app.models.enums import TaskStatus
 from app.models.user import User
 from app.repositories.tasks import TaskRepository
 from app.schemas import TaskCreate, TaskRead, TaskUpdate
+from app.schemas.events import TaskEvent
+from app.services.events import publish_event
 
 
 router = APIRouter(prefix="/tasks", tags=["tasks"])
@@ -32,6 +34,7 @@ async def create_task(
 
     task = await TaskRepository(session).create(**payload.model_dump())
     await session.commit()
+    await publish_event(TaskEvent(type="task.created", task=TaskRead.model_validate(task)))
     return TaskRead.model_validate(task)
 
 
@@ -46,6 +49,7 @@ async def update_task(
 
     task = await repository.update(task, **payload.model_dump())
     await session.commit()
+    await publish_event(TaskEvent(type="task.updated", task=TaskRead.model_validate(task)))
     return TaskRead.model_validate(task)
 
 
@@ -56,5 +60,7 @@ async def delete_task(task_id: int, session: SessionDependency) -> None:
     if task is None:
         raise HTTPException(status_code=404, detail="Task not found")
 
+    task_read = TaskRead.model_validate(task)
     await repository.delete(task)
     await session.commit()
+    await publish_event(TaskEvent(type="task.deleted", task=task_read))

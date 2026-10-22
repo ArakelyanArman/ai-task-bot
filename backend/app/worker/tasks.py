@@ -9,8 +9,11 @@ from app.core.config import get_settings
 from app.db.session import SessionLocal
 from app.models.enums import TranscriptionStatus
 from app.repositories.tasks import TaskRepository
+from app.schemas.events import TaskEvent
+from app.schemas.tasks import TaskRead
 from app.services.telegram import download_file
 from app.services.transcription import transcribe
+from app.services.events import publish_event
 
 
 logger = logging.getLogger(__name__)
@@ -26,6 +29,9 @@ async def mark_failed(task_id: int) -> None:
                 error_message="Couldn't transcribe the voice message",
             )
             await session.commit()
+            await publish_event(
+                TaskEvent(type="task.updated", task=TaskRead.model_validate(task))
+            )
 
 
 def is_retryable_api_error(error: APIError) -> bool:
@@ -57,6 +63,8 @@ async def transcribe_task(ctx: dict, task_id: int, file_id: str) -> None:
                 error_message=None,
             )
             await session.commit()
+            task_event = TaskRead.model_validate(task)
+            await publish_event(TaskEvent(type="task.updated", task=task_event))
 
         if task.telegram_chat_id is not None and task.telegram_message_id is not None:
             await bot.edit_message_text(

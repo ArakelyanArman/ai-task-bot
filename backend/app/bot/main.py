@@ -10,6 +10,9 @@ from app.db.session import SessionLocal
 from app.models.enums import TaskSource, TranscriptionStatus
 from app.repositories.tasks import TaskRepository
 from app.repositories.users import UserRepository
+from app.schemas.events import TaskEvent
+from app.schemas.tasks import TaskRead
+from app.services.events import publish_event
 from app.worker.queue import enqueue_transcription
 
 
@@ -65,6 +68,9 @@ async def voice_handler(message: Message) -> None:
                 telegram_message_id=acknowledgement.message_id,
             )
             await session.commit()
+            await publish_event(
+                TaskEvent(type="task.created", task=TaskRead.model_validate(task))
+            )
         except SQLAlchemyError:
             await session.rollback()
             logger.exception("Failed to create voice task from message %s", message.message_id)
@@ -84,6 +90,15 @@ async def voice_handler(message: Message) -> None:
                     error_message="Couldn't start transcription",
                 )
                 await session.commit()
+                await publish_event(
+                    TaskEvent(
+                        type="task.updated",
+                        task=TaskRead.model_validate(failed_task),
+                    )
+                )
+                await publish_event(
+                    TaskEvent(type="task.created", task=TaskRead.model_validate(task))
+                )
         await acknowledgement.edit_text("Couldn't start transcription. Please try again.")
 
 
