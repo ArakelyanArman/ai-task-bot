@@ -119,6 +119,9 @@ async def text_handler(message: Message) -> None:
                 source=TaskSource.TEXT,
             )
             await session.commit()
+            await publish_event(
+                TaskEvent(type="task.created", task=TaskRead.model_validate(task))
+            )
         except (SQLAlchemyError, OSError):
             await session.rollback()
             logger.exception("Failed to create task from message %s", message.message_id)
